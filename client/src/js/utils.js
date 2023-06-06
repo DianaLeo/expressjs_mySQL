@@ -1,6 +1,6 @@
 
 import {
-    customerTableBody
+    customerTableBody,
   } from './common';
 
 const getCustomers = (response)=>{

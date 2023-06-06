@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const database = require('../database');
-
+const bodyParser = require('body-parser');
 const router = Router();
 
 //get customer list
@@ -22,24 +22,36 @@ router.get('/customers', (req, res) => {
 });
 
 //post a new customer
-//http://localhost:5173?customerName=OluPhotography&contactName=DianaLiu&address=39ChesterRd&city=Brisbane&postcode=4113&country=AU
-//http://localhost/api/customer
-router.post('/customer', (req, res) => {
+//http://localhost:5173?customerID=9&customerName=OluPhotography&contactName=DianaLiu&address=39ChesterRd&city=Brisbane&postcode=4113&country=AU
+//http://localhost/api/postCustomer
+var urlEncodedParser = bodyParser.urlencoded({extended:false});
+router.post('/postCustomer', urlEncodedParser, (req, res) => {
     try {
         console.log('Backend enter new customer post method');
-        const newCustomer = req.body;
+        //Don't know which to use body or query?
+        console.log(req.body);
+        const customerID = req.body.customerID;
+        const customerName = req.body.customerName;
+        const contactName = req.body.contactName;
+        const address = req.body.address;
+        const city = req.body.city;
+        const postcode = req.body.postcode;
+        const country = req.body.country;
+        //const newCustomer = req.query;
 
         //This is very important. Even if POSTMAN's body has already include ' ', still need to add ' ' around ${}
-        var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${newCustomer.CustomerID},'${newCustomer.CustomerName}','${newCustomer.ContactName}', '${newCustomer.Address}', '${newCustomer.City}', '${newCustomer.Postcode}', '${newCustomer.Country}')`;
+        //var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${newCustomer.CustomerID},'${newCustomer.CustomerName}','${newCustomer.ContactName}', '${newCustomer.Address}', '${newCustomer.City}', '${newCustomer.Postcode}', '${newCustomer.Country}')`;
+        var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${customerID},'${customerName}','${contactName}', '${address}', '${city}', '${postcode}', '${country}')`;
 
         database.query(sql, (err, result) => {
             if (err) {
                 throw err;
             } else {
-                res.status(200).json({
-                    msg: 'Customer list post succeed',
-                    data: newCustomer.CustomerID
-                });
+                console.log('New customre saved to database');
+                // res.status(200).json({
+                //     msg: 'Customer list post succeed',
+                //     data: customerID
+                // });
             }
         });
     } catch (error) {

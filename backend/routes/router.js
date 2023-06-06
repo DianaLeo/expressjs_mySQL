@@ -11,7 +11,7 @@ router.get('/customers', (req, res) => {
         var sql = 'SELECT * FROM customers';
         database.query(sql, (err, result) => {
             res.status(200).json({
-                msg:'Customer list get succeed',
+                msg: 'Customer list get succeed',
                 data: result
             })
         });
@@ -24,13 +24,24 @@ router.get('/customers', (req, res) => {
 //post a new customer
 //http://localhost:5173?customerName=OluPhotography&contactName=DianaLiu&address=39ChesterRd&city=Brisbane&postcode=4113&country=AU
 //http://localhost/api/customer
-router.post('/customer',(req,res)=>{
+router.post('/customer', (req, res) => {
     try {
-        console.log('Bckend enter new customer post method');
-        console.log(req.body);
-        res.status(200).json({
-            msg:'New customer post succeed!'
-        })
+        console.log('Backend enter new customer post method');
+        const newCustomer = req.body;
+
+        //This is very important. Even if POSTMAN's body has already include ' ', still need to add ' ' around ${}
+        var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${newCustomer.CustomerID},'${newCustomer.CustomerName}','${newCustomer.ContactName}', '${newCustomer.Address}', '${newCustomer.City}', '${newCustomer.Postcode}', '${newCustomer.Country}')`;
+
+        database.query(sql, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                res.status(200).json({
+                    msg: 'Customer list post succeed',
+                    data: newCustomer.CustomerID
+                });
+            }
+        });
     } catch (error) {
         res.status(500).send('Server error');
     }

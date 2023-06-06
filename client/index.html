@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="./src/css/index.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="/main.js"></script>
   <title>Customers</title>
@@ -11,22 +12,39 @@
 
 <body>
   <div id="app">
+    <div id="newCustomerContainer">
+      <form id="newCustomer">
+        <label for="customerName">Customer Name</label>
+        <input type="text" id="customerName">
+        <label for="contactName">Contact Name</label>
+        <input type="text" id="contactName">
+        <label for="address">Address</label>
+        <input type="text" id="address">
+        <label for="city">City</label>
+        <input type="text" id="city">
+        <label for="postcode">Postcode</label>
+        <input type="text" id="postcode">
+        <label for="country">Country</label>
+        <input type="text" id="country">
+        <input type="submit" value="Add Customer">
+      </form>
+    </div>
     <div id="customerTableContainer">
       <table id="customerTable">
-      <thead>
-        <th>CustomerID</th>
-        <th>CustomerName</th>
-        <th>ContactName</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>Postcode</th>
-        <th>Country</th>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+        <thead>
+          <th>CustomerID</th>
+          <th>CustomerName</th>
+          <th>ContactName</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Postcode</th>
+          <th>Country</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
     </div>
-    
+
   </div>
 </body>
 

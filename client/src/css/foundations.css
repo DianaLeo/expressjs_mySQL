@@ -12,3 +12,6 @@ form {
     align-items: center;
     justify-content: center;
 }
+table{
+    padding-top: 2rem;
+}

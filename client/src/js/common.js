@@ -6,6 +6,6 @@ export const newCustomerForm = document.querySelector('#newCustomer');
 export const btn_addNewCustomer = document.querySelector('#newCustomer input[type="submit"]');
 
 
-//   newCustomerForm.addEventListener('submit',(e)=>{
+// btn_addNewCustomer.addEventListener('click',(e)=>{
 //     e.preventDefault()
 //   })

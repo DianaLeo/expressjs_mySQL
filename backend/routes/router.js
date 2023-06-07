@@ -25,7 +25,7 @@ router.get('/customers', (req, res) => {
 //http://localhost:5173?customerID=9&customerName=OluPhotography&contactName=DianaLiu&address=39ChesterRd&city=Brisbane&postcode=4113&country=AU
 //http://localhost/api/postCustomer
 var urlEncodedParser = bodyParser.urlencoded({extended:false});
-router.post('/postCustomer', urlEncodedParser, (req, res) => {
+router.post('/postCustomer', (req, res) => {
     try {
         console.log('Backend enter new customer post method');
         //Don't know which to use body or query?
@@ -49,9 +49,10 @@ router.post('/postCustomer', urlEncodedParser, (req, res) => {
             } else {
                 console.log('New customre saved to database');
                 // res.status(200).json({
-                //     msg: 'Customer list post succeed',
+                //     msg: 'Customer post succeed',
                 //     data: customerID
                 // });
+                res.end('New customer added!')
             }
         });
     } catch (error) {

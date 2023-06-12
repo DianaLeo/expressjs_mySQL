@@ -4,8 +4,5 @@ export const customerTableHead = document.querySelector('#customerTable thead');
 export const customerTableBody = document.querySelector('#customerTable tbody');
 export const newCustomerForm = document.querySelector('#newCustomer');
 export const btn_addNewCustomer = document.querySelector('#newCustomer input[type="submit"]');
+export const btn_edit = document.querySelector('#btnEdit');
 
-
-// btn_addNewCustomer.addEventListener('click',(e)=>{
-//     e.preventDefault()
-//   })

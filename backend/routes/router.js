@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const database = require('../database');
-const bodyParser = require('body-parser');
 const router = Router();
 
 //get customer list
@@ -13,7 +12,7 @@ router.get('/customers', (req, res) => {
             res.status(200).json({
                 msg: 'Customer list get succeed',
                 data: result
-            })
+            });
         });
     } catch (error) {
         res.status(500).send('Server error');
@@ -22,9 +21,7 @@ router.get('/customers', (req, res) => {
 });
 
 //post a new customer
-//http://localhost:5173?customerID=9&customerName=OluPhotography&contactName=DianaLiu&address=39ChesterRd&city=Brisbane&postcode=4113&country=AU
 //http://localhost/api/postCustomer
-var urlEncodedParser = bodyParser.urlencoded({extended:false});
 router.post('/postCustomer', (req, res) => {
     try {
         console.log('Backend enter new customer post method');
@@ -59,6 +56,25 @@ router.post('/postCustomer', (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
+//delete a customer
+//http://localhost:5173?customerID=15
+//http://localhost/api/deleteCustomer/13
+router.delete('/deleteCustomer/:id',(req,res)=>{
+    try {
+        console.log('Backend enter customer delete method!');
+        var sql=`DELETE FROM customers WHERE CustomerID=${req.params.id}`;
+        database.query(sql,(err,result)=>{
+            if (err) {
+                throw err;
+            }else{
+                res.end('Deleted');
+            }
+        });
+    } catch (err) {
+        res.status(500).send('Server error');
+    }
+})
 
 
 module.exports = router;

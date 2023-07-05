@@ -5,10 +5,13 @@ import {
   btn_edit
 } from './common';
 
+var recordsLength = 0;
+
 const getCustomers = (response) => {
   console.log('Frontend axios GET method.');
   const customers = response.data.data;
   customers.forEach((element, index) => {
+    recordsLength++;
     const tr = document.createElement('tr');
     const th = document.createElement('th');
     const customerName = document.createElement('td');
@@ -34,8 +37,9 @@ const getCustomers = (response) => {
 
 const deleteLastCustomer = () => {
   console.log('deleteLastCutomer()');
-  const url = 'http://localhost/api/deleteCustomer/10';
+  const url = 'http://localhost/api/deleteCustomer/' + recordsLength;
   axios.delete(url);
+  location.reload();
 }
 
 btn_edit.addEventListener('click', deleteLastCustomer);

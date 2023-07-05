@@ -26,6 +26,7 @@ router.post('/postCustomer', (req, res) => {
     try {
         console.log('Backend enter new customer post method');
         //Don't know which to use body or query?
+        //POST=>body, GET=>query
         console.log(req.body);
         const customerID = req.body.customerID;
         const customerName = req.body.customerName;
@@ -34,11 +35,8 @@ router.post('/postCustomer', (req, res) => {
         const city = req.body.city;
         const postcode = req.body.postcode;
         const country = req.body.country;
-        //const newCustomer = req.query;
 
-        //This is very important. Even if POSTMAN's body has already include ' ', still need to add ' ' around ${}
-        //var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${newCustomer.CustomerID},'${newCustomer.CustomerName}','${newCustomer.ContactName}', '${newCustomer.Address}', '${newCustomer.City}', '${newCustomer.Postcode}', '${newCustomer.Country}')`;
-        var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${customerID},'${customerName}','${contactName}', '${address}', '${city}', '${postcode}', '${country}')`;
+        var sql = `INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, Postcode, Country) VALUES (${customerID},'${customerName}','${contactName}','${address}','${city}','${postcode}','${country}')`;
 
         database.query(sql, (err, result) => {
             if (err) {
